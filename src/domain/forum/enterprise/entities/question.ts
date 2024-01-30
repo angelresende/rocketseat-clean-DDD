@@ -55,6 +55,7 @@ export class Question extends Entity<QuestionProps> {
     this.props.updatedAt = new Date()
   }
 
+  // eslint-disable-next-line @typescript-eslint/adjacent-overload-signatures
   set title(title: string) {
     this.props.title = title
     this.props.slug = Slug.createFromText(title)
@@ -62,11 +63,13 @@ export class Question extends Entity<QuestionProps> {
     this.touch()
   }
 
+  // eslint-disable-next-line @typescript-eslint/adjacent-overload-signatures
   set content(content: string) {
     this.props.content = content
     this.touch()
   }
 
+  // eslint-disable-next-line @typescript-eslint/adjacent-overload-signatures
   set bestAnswerId(bestAnswerId: UniqueEntityID | undefined) {
     this.props.bestAnswerId = bestAnswerId
     this.touch()
@@ -80,7 +83,7 @@ export class Question extends Entity<QuestionProps> {
       {
         ...props,
         slug: props.slug ?? Slug.createFromText(props.title),
-        createdAt: new Date(),
+        createdAt: props.createdAt ?? new Date(),
       },
       id,
     )

@@ -5,6 +5,7 @@ interface DeleteQuestionUseCaseRequest {
   questionId: string
 }
 
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface DeleteQuestionUseCaseResponse {}
 
 export class DeleteQuestionUseCase {
