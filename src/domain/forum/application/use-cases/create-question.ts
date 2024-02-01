@@ -1,16 +1,22 @@
 import { Question } from '@/domain/forum/enterprise/entities/question'
 import { QuestionsRepository } from '../repositories/questions-repository'
 import { UniqueEntityID } from '@/core/entities/unique-entity-id'
+import { Either, right } from '@/core/either'
+import { QuestionAttachment } from '@/domain/forum/enterprise/entities/question-attachment'
 
 interface CreateQuestionUseCaseRequest {
   authorId: string
   title: string
   content: string
+  attachmentsIds: string[]
 }
 
-interface CreateQuestionUseCaseResponse {
-  question: Question
-}
+type CreateQuestionUseCaseResponse = Either<
+  null,
+  {
+    question: Question
+  }
+>
 
 export class CreateQuestionUseCase {
   constructor(private questionsRepository: QuestionsRepository) {}
@@ -24,12 +30,22 @@ export class CreateQuestionUseCase {
       authorId: new UniqueEntityID(authorId),
       title,
       content,
+      attachmentsIds,
     })
+
+    const questionAttachments = attachmentsIds.map((attachmentId) => {
+      return QuestionAttachment.create({
+        attachmentId: new UniqueEntityID(attachmentId),
+        questionId: question.id,
+      })
+    })
+
+    question.attachments = questionAttachments
 
     await this.questionsRepository.create(question)
 
-    return {
+    return right({
       question,
-    }
+    })
   }
 }

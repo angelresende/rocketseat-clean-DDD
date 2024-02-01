@@ -13,7 +13,6 @@ export class Left<L, R> {
   isLeft(): this is Left<L, R> {
     return true
   }
-
 }
 
 // Success
