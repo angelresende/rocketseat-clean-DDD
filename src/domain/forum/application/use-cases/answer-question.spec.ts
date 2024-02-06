@@ -10,7 +10,7 @@ let sut: AnswerQuestionUseCase
 describe('Create Answer', () => {
   beforeEach(() => {
     inMemoryAnswerAttachmentsRepository =
-    new InMemoryAnswerAttachmentsRepository()
+      new InMemoryAnswerAttachmentsRepository()
     inMemoryAnswersRepository = new InMemoryAnswersRepository(
       inMemoryAnswerAttachmentsRepository,
     )

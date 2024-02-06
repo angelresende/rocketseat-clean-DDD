@@ -13,7 +13,7 @@ let sut: EditAnswerUseCase
 describe('Edit Answer', () => {
   beforeEach(() => {
     inMemoryAnswerAttachmentsRepository =
-    new InMemoryAnswerAttachmentsRepository()
+      new InMemoryAnswerAttachmentsRepository()
     inMemoryAnswersRepository = new InMemoryAnswersRepository(
       inMemoryAnswerAttachmentsRepository,
     )
